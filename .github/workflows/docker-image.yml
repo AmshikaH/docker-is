@@ -22,3 +22,5 @@ jobs:
       run: cd dockerfiles/jdk8/alpine/is && docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . 
     - name: Run image
       run: docker run -p 9443:9443 wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8  
+    - name: Test port
+      run: curl -k https://localhost:9443/carbon/admin/login.jsp
