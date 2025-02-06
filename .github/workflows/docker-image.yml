@@ -19,8 +19,6 @@ jobs:
       with:
         ref: ${{ github.event.inputs.branch }}
     - name: Navigate to the Alpine Docker folder
-      run: cd dockerfiles/jdk8/alpine/is 
-    - name: Build image
-      run: docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . 
+      run: cd dockerfiles/jdk8/alpine/is && docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . 
     - name: Run image
       run: docker run -it -p 9443:9443 wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8  
