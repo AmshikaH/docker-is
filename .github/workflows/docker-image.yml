@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Enter the branch name"
+        default: "5.10.x"
+        required: true
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: git checkout ${{ github.event.inputs.branch }} && cd dockerfiles/jdk8/alpine/is && docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . && docker run -it -p 9443:9443 wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8  
