@@ -16,5 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.branch }}
     - name: Build the Docker image
-      run: git checkout ${{ github.event.inputs.branch }} && cd dockerfiles/jdk8/alpine/is && docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . && docker run -it -p 9443:9443 wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8  
+      run: cd dockerfiles/jdk8/alpine/is && docker build -t wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8 . && docker run -it -p 9443:9443 wso2is:${{ github.event.inputs.branch }}-alpine-jdk-8  
